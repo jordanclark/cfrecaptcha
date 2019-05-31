@@ -1,0 +1,39 @@
+{
+    "name":"cfrecaptcha",
+    "slug":"cfrecaptcha",
+    "version":"0.5.0",
+    "author":"Jordan Clark <jordanclark@gmail.com>",
+    "keywords":[
+        "recaptcha",
+        "captcha",
+        "human verification",
+        "api",
+        "rest"
+    ],
+    "shortDescription":"API client for Google Recaptcha v2",
+    "type":"modules",
+    "location":"jordanclark/cfrecaptcha#v0.5.0",
+    "repository":{
+        "URL":"https://github.com/jordanclark/cfrecaptcha.git",
+        "type":"GIT"
+    },
+    "homepage":"https://github.com/jordanclark/cfrecaptcha",
+    "bugs":"https://github.com/jordanclark/cfrecaptcha/issues",
+    "license":[
+        {
+            "type":"Apache-2.0",
+            "URL":"https://github.com/jordanclark/cfrecaptcha/blob/master/LICENSE"
+        }
+    ],
+    "private":false,
+    "ignore":[
+        "**/.*",
+        "/test/",
+        "/tests/"
+    ],
+    "scripts":{
+        "postVersion":"package set location='jordanclark/cfrecaptcha#v`package version`'",
+        "onRelease":"publish",
+        "postPublish":"!git push --follow-tags"
+    }
+}
