@@ -65,7 +65,7 @@ component {
 		} else if ( left( out.statusCode, 1 ) == 2 ) {
 			try {
 				out.json= deserializeJSON( out.response );
-				if( structKeyExists( out.json.success ) ) {
+				if( structKeyExists( out.json, "success" ) ) {
 					out.success= out.json.success;
 				}
 				if( structKeyExists( out.json, "error-codes" ) ) {
