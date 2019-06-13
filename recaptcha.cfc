@@ -11,7 +11,7 @@ component {
 		this.siteKey= arguments.siteKey;
 		this.apiUrl= arguments.apiUrl;
 		this.httpTimeOut= arguments.httpTimeOut;
-		this.debug = arguments.debug;
+		this.debug= arguments.debug;
 	}
 
 	function debugLog(required input) {
@@ -51,17 +51,18 @@ component {
 			cfhttpparam( type="formfield", name="remoteip", value= arguments.remoteIP );
 			cfhttpparam( type="formfield", name="response", value= arguments.response );
 		}
-		out.response = toString( http.fileContent );
+		out.response= toString( http.fileContent );
+		out.statusCode= http.responseHeader.Status_Code ?: 500;
 
 		if ( left( out.statusCode, 1 ) == 5 ) {
 			arrayAppend( this.apiUrlPool, this.apiUrl );
-			this.apiUrl = this.apiUrlPool[ 1 ];
+			this.apiUrl= this.apiUrlPool[ 1 ];
 			arrayDeleteAt( this.apiUrlPool, 1 );
 		}
 		if ( left( out.statusCode, 1 ) == 4 || left( out.statusCode, 1 ) == 5 ) {
-			out.error = "status code error: #out.statusCode#";
+			out.error= "status code error: #out.statusCode#";
 		} else if ( out.response == "Connection Timeout" || out.response == "Connection Failure" ) {
-			out.error = out.response;
+			out.error= out.response;
 		} else if ( left( out.statusCode, 1 ) == 2 ) {
 			try {
 				out.json= deserializeJSON( out.response );
@@ -75,11 +76,11 @@ component {
 					}
 				}
 			} catch (any cfcatch) {
-				out.error = "JSON Error: " & cfcatch.message;
+				out.error= "JSON Error: " & cfcatch.message;
 			}
 		}
 		if ( len( out.error ) ) {
-			out.success = false;
+			out.success= false;
 		}
 		if ( !out.success ) {
 			this.debugLog( out );
