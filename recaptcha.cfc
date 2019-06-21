@@ -76,7 +76,7 @@ component {
 					}
 				}
 			} catch (any cfcatch) {
-				out.error= "JSON Error: " & cfcatch.message;
+				out.error= "JSON Error: " & (cfcatch.message?:"No catch message") & " " & (cfcatch.detail?:"No catch detail");
 			}
 		}
 		if ( len( out.error ) ) {
