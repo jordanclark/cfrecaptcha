@@ -5,8 +5,9 @@ component {
 	,	required string siteKey
 	,	string apiUrl= "https://www.google.com/recaptcha/api/siteverify?"
 	,	numeric httpTimeOut= 5
-	,	boolean debug= ( request.debug ?: false )
+	,	boolean debug
 	) {
+		arguments.debug = ( arguments.debug ?: request.debug ?: false );
 		this.secret= arguments.secret;
 		this.siteKey= arguments.siteKey;
 		this.apiUrl= arguments.apiUrl;
@@ -23,7 +24,12 @@ component {
 				request.log( arguments.input );
 			}
 		} else if( this.debug ) {
-			cftrace( text=( isSimpleValue( arguments.input ) ? arguments.input : "" ), var=arguments.input, category="recaptcha", type="information" );
+			var info= ( isSimpleValue( arguments.input ) ? arguments.input : serializeJson( arguments.input ) );
+			cftrace(
+				var= "info"
+			,	category= "recaptcha"
+			,	type= "information"
+			);
 		}
 		return;
 	}
