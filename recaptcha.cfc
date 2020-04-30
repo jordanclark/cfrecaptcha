@@ -13,6 +13,7 @@ component {
 		this.apiUrl= arguments.apiUrl;
 		this.httpTimeOut= arguments.httpTimeOut;
 		this.debug= arguments.debug;
+		this.apiUrlPool = arrayNew(1);
 	}
 
 	function debugLog(required input) {
@@ -51,7 +52,7 @@ component {
 			success= false
 		,	error= ''
 		};
-	
+
 		cfhttp( result="http", method="POST", url=this.apiUrl, charset="UTF-8", throwOnError=false, timeOut=this.httpTimeOut ) {
 			cfhttpparam( type="formfield", name="secret", value= this.secret );
 			cfhttpparam( type="formfield", name="remoteip", value= arguments.remoteIP );
