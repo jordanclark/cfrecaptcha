@@ -73,7 +73,7 @@ component {
 				if( structKeyExists( out.json, "error-codes" ) ) {
 					out.error= out.json[ "error-codes" ];
 					if( isArray( out.error ) ) {
-						out.error= listToArray( out.error, " " );
+						out.error = arrayToList( out.error, " " );
 					}
 				}
 			} catch (any cfcatch) {
